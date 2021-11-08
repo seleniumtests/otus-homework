@@ -29,7 +29,15 @@ def get_new_books_list():
 
         new_books_list = []
         for row in reader:
-            new_books_list.append(row)
+            sup_dict = {}
+            for key, value in row.items():
+                if key == "Pages":
+                    sup_dict[key.lower()] = int(value)
+                elif key == "Publisher":
+                    pass
+                else:
+                    sup_dict[key.lower()] = value
+            new_books_list.append(sup_dict)
     return new_books_list
 
 
@@ -74,3 +82,4 @@ if __name__ == '__main__':
     book = get_next_book(books)
     users_with_books = users_receive_books(users, books, book)
     write_new_users_with_books_list(users_with_books)
+
